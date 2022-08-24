@@ -19,14 +19,13 @@
 # in the templates via {{ site.myvariable }}.
 
 title: Pinapple Pizza
-email: pinapple@pizza.com
+email: pinapple@pineapplepizza.com
 description: >- # this means to ignore newlines until "baseurl:"
-  Pineapple Pizza is a small familiy run pizza chian. 
-  Check out how we integrate pineaplles into our pizza
+  Pineapple Pizza is a small familiy run pizza chain. 
+  Check out how we integrate pineapples into our pizza
 baseurl: "" # the subpath of your site, e.g. /blog
 url: "" # the base hostname & protocol for your site, e.g. http://example.com
-twitter_username: Pinapple Pizza
-github_username:  jekyll
+twitter_username: PinapplePizza
 
 # Build settings
 theme: minima
