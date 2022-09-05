@@ -13,11 +13,7 @@ For this solution there are created three users; Bob, Dave and Mark.
 
 ### User roles diagram
 
-
-
 <img title="" src="assets/775412825a0b5e244a99128467a5cc06c98aea2a.png" alt="azureroles.drawio.png" data-align="center" width="398">
-
-
 
 ## Static Web App With Jekyll
 
@@ -74,8 +70,6 @@ This generator makes it possible to deploy the new changes to the static web app
 
 <img title="" src="assets/232b0c4fca81f1df0385e99879106787b971146d.png" alt="workflow.drawio(1).png" width="682" data-align="center">
 
-
-
 * Jekyll is used for generating the static site. 
 
 * Visual Studio Code is the IDE used for witing application code.
@@ -84,18 +78,18 @@ This generator makes it possible to deploy the new changes to the static web app
 
 * Each time new code is pushed, GitHub Actions CI/CD pipeline runs, and if the run is successful the new changes will be deployed to the static web apps in Azure.
 
-
-
 ## Azure Infrastructure Diagram
 
 <img title="" src="assets/5d130b6b2923fba51947f7b7582999b776edd0e8.png" alt="azuresetup.drawio(2).png" data-align="center" width="374">
-
-
-
-
 
 Within the subscription the resource group for the static web apps are created. Within this resource group the two Static Web Apps and the Azure Front Door loadbalancer are placed.
 
 ## Front Door Routing of user request
 
-![frontdooruser.drawio.png](assets/341454bf291eeee811a4b4d4f139928d0bb4e63e.png)
+<img title="" src="assets/c7ff86b53eb8e9e2deb83c4806b679a6504957e2.png" alt="userreq.png" width="368" data-align="center">
+
+Azure Front Door is a Content Delivery Network that provides users global access to the web content. When a user from Oslo request the web app using the URL for the Front Door Service he will be sent to the Static Web App hosted in West Europe. The request is forwarded based on latency, and therefore forwarded to the lowest latency origin Static Web App. The requests are therefore sent to the nearest set of origin based on Network latency.
+
+
+
+## Alert Diagram
