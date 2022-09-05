@@ -93,3 +93,7 @@ Azure Front Door is a Content Delivery Network that provides users global access
 
 
 ## Alert Diagram
+
+<img src="assets/f327459af4b05240b8a3bc5f7c45a9aa3cd0f2dc.png" title="" alt="alertsdiagram.drawio.png" data-align="center">
+
+An Alert created in Azure Monitor based on the Metrics for Azure Front Door will trigger an Alert Rule if the conditions are met. Here the conditions are that the Alert Rule is triggered if there are over 100 requests to the Azure Front Door. The Alert Rule is set to notify the Action Group with the user Bob on email of this event. 
