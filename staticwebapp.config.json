@@ -1,7 +1,13 @@
 {
+    "routes": [
+        {
+            "route": "/about",
+            "allowedRoles": [ "authenticated" ]
+        }
+    ],
     "globalHeaders": {
       "Access-Control-Allow-Origin": "https://mango-ocean-0ce316603.1.azurestaticapps.net",
-      "Access-Control-Allow-Methods": "POST, GET, OPTIONS"
+      "Access-Control-Allow-Methods": "POST"
     },
     "networking": {
         "allowedIpRanges": ["AzureFrontDoor.Backend"]
