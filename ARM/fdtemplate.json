@@ -1,0 +1,178 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2019-04-01/deploymentTemplate.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "profiles_fd_pizza_prod_01_name": {
+            "defaultValue": "fd-pizza-prod-01",
+            "type": "String"
+        }
+    },
+    "variables": {},
+    "resources": [
+        {
+            "type": "Microsoft.Cdn/profiles",
+            "apiVersion": "2021-06-01",
+            "name": "[parameters('profiles_fd_pizza_prod_01_name')]",
+            "location": "Global",
+            "tags": {
+                "BusinessUnit": "IT"
+            },
+            "sku": {
+                "name": "Standard_AzureFrontDoor"
+            },
+            "kind": "frontdoor",
+            "properties": {
+                "originResponseTimeoutSeconds": 60
+            }
+        },
+        {
+            "type": "Microsoft.Cdn/profiles/afdendpoints",
+            "apiVersion": "2021-06-01",
+            "name": "[concat(parameters('profiles_fd_pizza_prod_01_name'), '/pineapplepizza')]",
+            "location": "Global",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_fd_pizza_prod_01_name'))]"
+            ],
+            "properties": {
+                "enabledState": "Enabled"
+            }
+        },
+        {
+            "type": "Microsoft.Cdn/profiles/origingroups",
+            "apiVersion": "2021-06-01",
+            "name": "[concat(parameters('profiles_fd_pizza_prod_01_name'), '/og-pizza')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_fd_pizza_prod_01_name'))]"
+            ],
+            "properties": {
+                "loadBalancingSettings": {
+                    "sampleSize": 4,
+                    "successfulSamplesRequired": 3,
+                    "additionalLatencyInMilliseconds": 50
+                },
+                "healthProbeSettings": {
+                    "probePath": "/",
+                    "probeRequestType": "HEAD",
+                    "probeProtocol": "Http",
+                    "probeIntervalInSeconds": 100
+                },
+                "sessionAffinityState": "Disabled"
+            }
+        },
+        {
+            "type": "Microsoft.Cdn/profiles/origingroups/origins",
+            "apiVersion": "2021-06-01",
+            "name": "[concat(parameters('profiles_fd_pizza_prod_01_name'), '/og-pizza/stapp-pizza-01')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles/origingroups', parameters('profiles_fd_pizza_prod_01_name'), 'og-pizza')]",
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_fd_pizza_prod_01_name'))]"
+            ],
+            "properties": {
+                "hostName": "https://mango-ocean-0ce316603.1.azurestaticapps.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "https://mango-ocean-0ce316603.1.azurestaticapps.net",
+                "priority": 1,
+                "weight": 1000,
+                "enabledState": "Enabled",
+                "enforceCertificateNameCheck": true
+            }
+        },
+        {
+            "type": "Microsoft.Cdn/profiles/origingroups/origins",
+            "apiVersion": "2021-06-01",
+            "name": "[concat(parameters('profiles_fd_pizza_prod_01_name'), '/og-pizza/stapp-pizza-03')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles/origingroups', parameters('profiles_fd_pizza_prod_01_name'), 'og-pizza')]",
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_fd_pizza_prod_01_name'))]"
+            ],
+            "properties": {
+                "hostName": "https://salmon-forest-077cd8e00.1.azurestaticapps.net",
+                "httpPort": 80,
+                "httpsPort": 443,
+                "originHostHeader": "https://salmon-forest-077cd8e00.1.azurestaticapps.net",
+                "priority": 1,
+                "weight": 1000,
+                "enabledState": "Enabled",
+                "enforceCertificateNameCheck": true
+            }
+        },
+        {
+            "type": "Microsoft.Cdn/profiles/afdendpoints/routes",
+            "apiVersion": "2021-06-01",
+            "name": "[concat(parameters('profiles_fd_pizza_prod_01_name'), '/pineapplepizza/route-pizza')]",
+            "dependsOn": [
+                "[resourceId('Microsoft.Cdn/profiles/afdendpoints', parameters('profiles_fd_pizza_prod_01_name'), 'pineapplepizza')]",
+                "[resourceId('Microsoft.Cdn/profiles', parameters('profiles_fd_pizza_prod_01_name'))]",
+                "[resourceId('Microsoft.Cdn/profiles/origingroups', parameters('profiles_fd_pizza_prod_01_name'), 'og-pizza')]"
+            ],
+            "properties": {
+                "cacheConfiguration": {
+                    "compressionSettings": {
+                        "isCompressionEnabled": false,
+                        "contentTypesToCompress": [
+                            "application/eot",
+                            "application/font",
+                            "application/font-sfnt",
+                            "application/javascript",
+                            "application/json",
+                            "application/opentype",
+                            "application/otf",
+                            "application/pkcs7-mime",
+                            "application/truetype",
+                            "application/ttf",
+                            "application/vnd.ms-fontobject",
+                            "application/xhtml+xml",
+                            "application/xml",
+                            "application/xml+rss",
+                            "application/x-font-opentype",
+                            "application/x-font-truetype",
+                            "application/x-font-ttf",
+                            "application/x-httpd-cgi",
+                            "application/x-javascript",
+                            "application/x-mpegurl",
+                            "application/x-opentype",
+                            "application/x-otf",
+                            "application/x-perl",
+                            "application/x-ttf",
+                            "font/eot",
+                            "font/ttf",
+                            "font/otf",
+                            "font/opentype",
+                            "image/svg+xml",
+                            "text/css",
+                            "text/csv",
+                            "text/html",
+                            "text/javascript",
+                            "text/js",
+                            "text/plain",
+                            "text/richtext",
+                            "text/tab-separated-values",
+                            "text/xml",
+                            "text/x-script",
+                            "text/x-component",
+                            "text/x-java-source"
+                        ]
+                    },
+                    "queryStringCachingBehavior": "IgnoreQueryString"
+                },
+                "customDomains": [],
+                "originGroup": {
+                    "id": "[resourceId('Microsoft.Cdn/profiles/origingroups', parameters('profiles_fd_pizza_prod_01_name'), 'og-pizza')]"
+                },
+                "ruleSets": [],
+                "supportedProtocols": [
+                    "Http",
+                    "Https"
+                ],
+                "patternsToMatch": [
+                    "/*"
+                ],
+                "forwardingProtocol": "MatchRequest",
+                "linkToDefaultDomain": "Enabled",
+                "httpsRedirect": "Enabled",
+                "enabledState": "Enabled"
+            }
+        }
+    ]
+}
