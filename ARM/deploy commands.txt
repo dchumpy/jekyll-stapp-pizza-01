@@ -1,0 +1,12 @@
+$templateFile = Read-Host -Prompt "Enter the template file path and file name"
+$templateparameterFile = Read-Host -Prompt "Enter the template parameter file path and file name"
+
+New-AzResourceGroupDeployment `
+  -Name DeployLocalTemplate `
+  -ResourceGroupName rg-pizza-01 `
+  -TemplateFile $templateFile `
+  -TemplateParameterFile $templateparameterfile `
+  -verbose
+  
+  #Testing FD alerts:
+  1..100 | % {invoke-webrequest -Uri https://pineapplepizza-erc2dvcue5eecuf7.z01.azurefd.net/ -DisableKeepAlive}
