@@ -76,7 +76,9 @@ This generator makes it possible to deploy the new changes to the static web app
 
 * Each time new code is pushed, GitHub Actions CI/CD pipeline runs, and if the run is successful the new changes will be deployed to the static web apps in Azure.
 
-<img title="" src="assets/232b0c4fca81f1df0385e99879106787b971146d.png" alt="workflow.drawio(1).png" width="682" data-align="center">
+<img src="assets/521a4d0f25d2409ca59200ecf9eec292a80806d3.png" title="" alt="workflow.drawio(2).png" data-align="center">
+
+
 
 ## Azure Infrastructure Diagram
 
