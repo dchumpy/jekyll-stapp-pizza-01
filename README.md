@@ -78,8 +78,6 @@ This generator makes it possible to deploy the new changes to the static web app
 
 <img src="assets/521a4d0f25d2409ca59200ecf9eec292a80806d3.png" title="" alt="workflow.drawio(2).png" data-align="center">
 
-
-
 ## Azure Infrastructure Diagram
 
 Within the subscription the resource group for the static web apps are created. Within this resource group the two Static Web Apps and the Azure Front Door loadbalancer are placed.
