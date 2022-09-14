@@ -10,4 +10,4 @@ title: Home
 
 Order your pizza now!
 
-![pexels-antony-trivet-12843068.jpg](../assets/7aab96edacd2983c521dd3022cdb79cbf8dcbdac.jpg)
+![pexels-antony-trivet-12843068.jpg](../assets/7aab96edacd2983c521dd3022cdb79cbf8dcbdac.jpg){: width="450" }
