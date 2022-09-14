@@ -12,4 +12,4 @@ Email: pineapple@pineapplepizza.com
 
 Phone: 91994973
 
-<img title="" src="../assets/6f75850334333b37e6c53e519d57a870bdfca446.jpg" alt="" data-align="center" width="398">
+![testest](../assets/6f75850334333b37e6c53e519d57a870bdfca446.jpg)
